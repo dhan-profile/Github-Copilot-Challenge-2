@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 Days Habit Tracker</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .checkbox-container label {
+            margin: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #333;
+            font-weight: 800;
+        }
+
+        /* DATE PICKER */
+        input[type="date"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-family: sans-serif, Arial;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="date"]:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* ======== CHECKBOXES ============ */
+
+        /* Add this inside the <style> tag */
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .checkbox-container label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: box-shadow 0.3s;
+        }
+
+        .checkbox-container label:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            cursor: pointer;
+            appearance: none;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .checkbox-container input[type="checkbox"]:hover {
+            border-color: #999;
+        }
+
+        .checkbox-container .date-label {
+            font-size: 14px;
+            color: #333;
+            margin-top: 5px;
+        }
+
+        .checkbox-container .text-box {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .checkbox-container .text-box:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* ============= RESET BUTTON ========== */
+        /* Add this inside the <style> tag */
+        #resetButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #f44336;
+            /* Red color */
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        #resetButton:hover {
+            background-color: #d32f2f;
+            /* Darker red on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #resetButton:active {
+            background-color: #b71c1c;
+            /* Even darker red on click */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ========== DARK MODE CODE ============ */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 10px;
+            }
+
+            table,
+            th,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            th,
+            td {
+                box-sizing: border-box;
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            border-radius: 1.5rem;
+            font-weight: 800;
+        }
+
+        .dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .dark-theme button {
+            color: #333;
+            background-color: #fff;
+        }
+
+        .dark-theme .container {
+            background-color: #444;
+        }
+
+        .dark-theme h1 {
+            color: #fff;
+        }
+
+        .dark-theme table,
+        .dark-theme th,
+        .dark-theme td {
+            border-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>60 Days Habit Tracker</h1>
+        <button class="theme-toggle" onclick="toggleTheme()">B/W</button>
+        <h2>Select the start date:</h2>
+        <input type="date" id="startDate" />
+        <div class="checkbox-container">
+        </div>
+        <input type="text" class="text-box" placeholder="Enter your notes here..." />
+        <div class="progress-circle">
+            <div class="circle" id="progress">0%</div>
+        </div>
+        <button id="resetButton">Reset</button>
+    </div>
+    <script>
+        const checkboxContainer = document.querySelector('.checkbox-container');
+        const progressCircle = document.getElementById('progress');
+        const startDateInput = document.getElementById('startDate');
+
+        startDateInput.addEventListener('change', generateCheckboxes);
+
+        function generateCheckboxes() {
+            checkboxContainer.innerHTML = ''; // Clear existing checkboxes
+            const startDate = new Date(startDateInput.value);
+            for (let i = 0; i < 60; i++) {
+                const date = new Date(startDate);
+                date.setDate(startDate.getDate() + i);
+                const dateString = date.toISOString().split('T')[0];
+
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'day' + (i + 1);
+                checkbox.addEventListener('change', updateProgress);
+
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(dateString));
+                checkboxContainer.appendChild(label);
+            }
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checkbox-container input');
+            const checkedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+            const percentage = Math.round((checkedCount / 60) * 100);
+            progressCircle.textContent = percentage + '%';
+        }
+
+        const resetButton = document.getElementById('resetButton');
+        resetButton.addEventListener('click', resetCheckboxes);
+
+        function resetCheckboxes() {
+            const checkboxes = document.querySelectorAll('.checkbox-container input');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            updateProgress();
+        }
+
+        // Update the generateCheckboxes function inside the <script> tag
+        // Update the generateCheckboxes function inside the <script> tag
+        function generateCheckboxes() {
+            checkboxContainer.innerHTML = ''; // Clear existing checkboxes
+            const startDate = new Date(startDateInput.value);
+            for (let i = 0; i < 60; i++) {
+                const date = new Date(startDate);
+                date.setDate(startDate.getDate() + i);
+                const dateString = date.toISOString().split('T')[0];
+
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'day' + (i + 1);
+                checkbox.addEventListener('change', updateProgress);
+
+                const dateLabel = document.createElement('span');
+                dateLabel.className = 'date-label';
+                dateLabel.textContent = dateString;
+
+                const textBox = document.createElement('input');
+                textBox.type = 'text';
+                textBox.className = 'text-box';
+                textBox.placeholder = 'Enter your notes here...';
+
+                label.appendChild(checkbox);
+                label.appendChild(dateLabel);
+                label.appendChild(textBox);
+                checkboxContainer.appendChild(label);
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
+    </script>
+</body>
+
+</html>
